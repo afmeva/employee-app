@@ -123,5 +123,10 @@
       }
     }
   },
-  "defaultProject": "employee-app"
+  "defaultProject": "employee-app",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
