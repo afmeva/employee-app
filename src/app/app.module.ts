@@ -3,10 +3,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 
 import { AppComponent } from './app.component';
+import { EmployeeTableComponent } from './employee-table/employee-table.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployeeTableComponent
   ],
   imports: [
     BrowserAnimationsModule,

@@ -19,11 +19,6 @@ const ELEMENT_DATA: employee[] = [
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-
 export class AppComponent {
-  displayedColumns: string[] = ['name', 'age', 'username', 'hireDate', 'controls'];
-  dataSource = ELEMENT_DATA;
-  onErase(id: number) {
-    console.log(id);
-  }
+  data = ELEMENT_DATA;
 }
