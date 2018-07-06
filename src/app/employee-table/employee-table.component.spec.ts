@@ -13,6 +13,17 @@ describe('EmployeeTableComponent', () => {
     { id: 3, name: 'Goku', age: 10, username: 'Mona123', hireDate: 1800000 },
   ];
 
+  const BUTTON_ARRAY = [
+    {
+      name: 'edit',
+      callback: jasmine.createSpy()
+    },
+    {
+      name: 'erase',
+      callback: jasmine.createSpy()
+    }
+  ];
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [EmployeeTableComponent],
@@ -26,6 +37,7 @@ describe('EmployeeTableComponent', () => {
     component = fixture.componentInstance;
 
     component.dataSource = DATA;
+    component.buttons = BUTTON_ARRAY;
 
     fixture.detectChanges();
   });
@@ -39,24 +51,15 @@ describe('EmployeeTableComponent', () => {
   });
 
   it('should render the expected buttons with the given button array', () => {
-    const BUTTON_ARRAY = [
-      {
-        name: 'edit',
-        callback: jasmine.createSpy()
-      },
-      {
-        name: 'erase',
-        callback: jasmine.createSpy()
-      }
-    ];
+    const buttons = fixture.nativeElement.querySelector('tr[mat-row]').querySelectorAll('button');
+    console.log(fixture.nativeElement.querySelector('td[mat-cell]'));
 
-    const buttons = fixture.nativeElement.querySelector('td[mat-cell]').querySelectorAll('button');
     expect(buttons.length).toBe(BUTTON_ARRAY.length);
 
     buttons[0].click();
-    expect(buttons[0].callback).toHaveBeenCalled();
+    expect(BUTTON_ARRAY[0].callback).toHaveBeenCalled();
 
     buttons[1].click();
-    expect(buttons[1].callback).toHaveBeenCalled();
+    expect(BUTTON_ARRAY[1].callback).toHaveBeenCalled();
   });
 });

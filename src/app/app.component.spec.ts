@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 @Component({ selector: 'app-employee-table', template: '' })
 class tableMockComponent {
   @Input() dataSource;
+  @Input() buttons;
 }
 
 describe('AppComponent', () => {
