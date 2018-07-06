@@ -6,9 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./employee-table.component.scss']
 })
 export class EmployeeTableComponent {
-  @Input() dataSource;
+  @Input() dataSource: object[];
+  @Input() buttons: object[];
   displayedColumns: string[] = ['name', 'age', 'username', 'hireDate', 'controls'];
-  onErase(id: number) {
-    console.log(id);
-  }
 }
