@@ -1,11 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
 import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
+//routes
+import routes from './routes/routes.config';
+
+//components
 import { AppComponent } from './app.component';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
+import { NewUserComponent } from './new-user/new-user.component';
+import { HomeComponent } from './home/home.component';
 
+//TODO: group up interfaces
 export interface employee {
   id: number;
   name: string;
@@ -20,17 +29,22 @@ const ELEMENT_DATA: employee[] = [
   { id: 3, name: 'Goku', age: 10, username: 'Mona123', hireDate: 1800000 },
 ];
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    EmployeeTableComponent
+    EmployeeTableComponent, // TODO: review declaration.
+    NewUserComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,
+    RouterModule.forRoot(routes),
     StoreModule.forRoot({
       employees: () => ELEMENT_DATA
     }),
-    MatTableModule
+    MatTableModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
