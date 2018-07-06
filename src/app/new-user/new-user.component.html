@@ -1,3 +1,53 @@
-<p>
-  new-user works!
-</p>
+<form [formGroup]="formGroup">
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="name" formControlName="name">
+    <mat-error *ngIf="formGroup.hasError('email', ['name'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="Date of Birth" formControlName="dob">
+    <mat-error *ngIf="formGroup.hasError('required', ['dob'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="Country" formControlName="country">
+    <mat-error *ngIf="formGroup.hasError('required', ['country'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="username" formControlName="username">
+    <mat-error *ngIf="formGroup.hasError('required', ['username'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="Hire Date" formControlName="hireDate">
+    <mat-error *ngIf="formGroup.hasError('required', ['hireDate'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="Area" formControlName="area">
+    <mat-error *ngIf="formGroup.hasError('required', ['area'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="Job Title" formControlName="jobTitle">
+    <mat-error *ngIf="formGroup.hasError('required', ['jobTitle'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="new-user__field">
+    <input matInput placeholder="Tip Rate" formControlName="tipRate">
+    <mat-error *ngIf="formGroup.hasError('required', ['tipRate'])">
+      Please enter a valid name
+    </mat-error>
+  </mat-form-field>
+
+
+</form>
+<p>Form value: {{ formGroup.value | json }}</p>

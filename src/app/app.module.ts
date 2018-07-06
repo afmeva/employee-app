@@ -2,8 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
+//Material
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input'
 
 //routes
 import routes from './routes/routes.config';
@@ -29,7 +33,6 @@ const ELEMENT_DATA: employee[] = [
   { id: 3, name: 'Goku', age: 10, username: 'Mona123', hireDate: 1800000 },
 ];
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,8 +46,10 @@ const ELEMENT_DATA: employee[] = [
     StoreModule.forRoot({
       employees: () => ELEMENT_DATA
     }),
+    ReactiveFormsModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

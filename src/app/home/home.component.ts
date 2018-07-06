@@ -6,6 +6,13 @@ interface AppState {
   employees: object[];
 };
 
+type jobTitle = "undef" | "host" | "waitress";
+
+enum ex {
+  a = 'a',
+  b = 'b'
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -14,6 +21,8 @@ interface AppState {
 export class HomeComponent {
   data: Observable<object>;
   buttons: object[];
+  test: jobTitle;
+
   constructor(private store: Store<AppState>) {
     this.data = store.select('employees');
     this.buttons = [{
@@ -27,5 +36,8 @@ export class HomeComponent {
         console.log(id)
       }
     }]
+    console.log(Object.keys(ex));
+
+    this.test = 'undef';
   }
 }
