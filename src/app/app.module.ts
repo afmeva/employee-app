@@ -5,12 +5,16 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 //Material
+import { MatNativeDateModule } from '@angular/material'
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'
+import { MatDatepickerModule } from '@angular/material/datepicker'
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 //routes
-import routes from './routes/routes.config';
+import { routes } from './routes/routes.config';
 
 //components
 import { AppComponent } from './app.component';
@@ -47,9 +51,13 @@ const ELEMENT_DATA: employee[] = [
       employees: () => ELEMENT_DATA
     }),
     ReactiveFormsModule,
+    MatNativeDateModule,
     MatTableModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatDatepickerModule,
+    MatAutocompleteModule,
+    MatSlideToggleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

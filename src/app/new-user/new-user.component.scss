@@ -1,3 +1,14 @@
-.new-user__field {
-  margin: 10px;
+.new-user {
+  &__base {
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
+    grid-gap: 20px;
+    max-width: 975px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  &__field {
+    width: 100%;
+  }
 }

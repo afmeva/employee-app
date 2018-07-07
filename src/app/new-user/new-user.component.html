@@ -1,53 +1,73 @@
-<form [formGroup]="formGroup">
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="name" formControlName="name">
-    <mat-error *ngIf="formGroup.hasError('email', ['name'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="Date of Birth" formControlName="dob">
-    <mat-error *ngIf="formGroup.hasError('required', ['dob'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="Country" formControlName="country">
-    <mat-error *ngIf="formGroup.hasError('required', ['country'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="username" formControlName="username">
-    <mat-error *ngIf="formGroup.hasError('required', ['username'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="Hire Date" formControlName="hireDate">
-    <mat-error *ngIf="formGroup.hasError('required', ['hireDate'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="Area" formControlName="area">
-    <mat-error *ngIf="formGroup.hasError('required', ['area'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="Job Title" formControlName="jobTitle">
-    <mat-error *ngIf="formGroup.hasError('required', ['jobTitle'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="new-user__field">
-    <input matInput placeholder="Tip Rate" formControlName="tipRate">
-    <mat-error *ngIf="formGroup.hasError('required', ['tipRate'])">
-      Please enter a valid name
-    </mat-error>
-  </mat-form-field>
+<form [formGroup]="formGroup" class="new-user__base">
+  <div>
+    <mat-form-field class="new-user__field">
+      <input matInput placeholder="name" formControlName="name">
+      <mat-error *ngIf="formGroup.hasError('required', ['name'])">
+        Please enter a valid name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="new-user__field">
+      <input matInput [max]="maxDate" [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
+      <mat-hint>You must be older than 18</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker startView="year"></mat-datepicker>
+      <mat-error *ngIf="formGroup.hasError('required', ['name'])">
+        Please enter a date of birth
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="new-user__field">
+      <input matInput placeholder="Country" [matAutocomplete]="auto" formControlName="country">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let country of countries" [value]="country.name">
+          <span>{{country.name}}</span>
+        </mat-option>
+      </mat-autocomplete>
+      <mat-error *ngIf="formGroup.hasError('required', ['country'])">
+        Please enter a country
+      </mat-error>
+    </mat-form-field>
 
+    <mat-form-field class="new-user__field ">
+      <input matInput placeholder="username " formControlName="username">
+      <mat-error *ngIf="formGroup.hasError( 'required', [ 'username']) ">
+        Please enter a username
+      </mat-error>
+    </mat-form-field>
 
+    <mat-form-field class="new-user__field">
+      <input matInput [max]="maxDateHireDate" [matDatepicker]="hireDatePicker" placeholder="Hire Date" formControlName="hireDate">
+      <mat-datepicker-toggle matSuffix [for]="hireDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #hireDatePicker startView="year"></mat-datepicker>
+      <mat-error *ngIf="formGroup.hasError('required', ['hireDate'])">
+        Please enter a hire date date
+      </mat-error>
+    </mat-form-field>
+
+    <div>
+      <mat-slide-toggle [checked]="checked" color="primary" labelPosition="before">
+        Status
+      </mat-slide-toggle>
+    </div>
+  </div>
+  <!-- 
+    <mat-form-field class="new-user__field ">
+      <input matInput placeholder="Area " formControlName="area ">
+      <mat-error *ngIf="formGroup.hasError( 'required', [ 'area']) ">
+        Please enter a valid name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="new-user__field ">
+      <input matInput placeholder="Job Title " formControlName="jobTitle ">
+      <mat-error *ngIf="formGroup.hasError( 'required', [ 'jobTitle']) ">
+        Please enter a valid name
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="new-user__field ">
+      <input matInput placeholder="Tip Rate " formControlName="tipRate ">
+      <mat-error *ngIf="formGroup.hasError( 'required', [ 'tipRate']) ">
+        Please enter a valid name
+      </mat-error>
+    </mat-form-field> 
+  -->
 </form>
 <p>Form value: {{ formGroup.value | json }}</p>
