@@ -11,4 +11,4 @@ const routes: Routes = [
   // { path: '**', component: PageNotFoundComponent }
 ];
 
-export default routes;
+export { routes };
