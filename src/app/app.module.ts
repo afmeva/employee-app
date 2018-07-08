@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //Material
 import { MatNativeDateModule } from '@angular/material'
@@ -12,6 +12,11 @@ import { MatInputModule } from '@angular/material/input'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 //routes
 import { routes } from './routes/routes.config';
@@ -21,6 +26,7 @@ import { AppComponent } from './app.component';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
 import { NewUserComponent } from './new-user/new-user.component';
 import { HomeComponent } from './home/home.component';
+import { JobAreaSelectorComponent } from './job-area-selector/job-area-selector.component';
 
 //TODO: group up interfaces
 export interface employee {
@@ -42,7 +48,8 @@ const ELEMENT_DATA: employee[] = [
     AppComponent,
     EmployeeTableComponent, // TODO: review declaration.
     NewUserComponent,
-    HomeComponent
+    HomeComponent,
+    JobAreaSelectorComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -50,6 +57,7 @@ const ELEMENT_DATA: employee[] = [
     StoreModule.forRoot({
       employees: () => ELEMENT_DATA
     }),
+    FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
     MatTableModule,
@@ -57,7 +65,11 @@ const ELEMENT_DATA: employee[] = [
     MatInputModule,
     MatDatepickerModule,
     MatAutocompleteModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatButtonToggleModule,
+    MatTabsModule,
+    MatRadioModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

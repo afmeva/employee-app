@@ -1,0 +1,11 @@
+.job-area-selector {
+  &__radioGroup {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  &__radio {
+    margin: 0 20px 10px;
+  }
+}
