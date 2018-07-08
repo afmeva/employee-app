@@ -44,30 +44,20 @@
     </mat-form-field>
 
     <div>
-      <mat-slide-toggle [checked]="checked" color="primary" labelPosition="before">
+      <mat-slide-toggle formControlName="status" color="primary" labelPosition="before">
         Status
       </mat-slide-toggle>
     </div>
   </div>
-  <!-- 
-    <mat-form-field class="new-user__field ">
-      <input matInput placeholder="Area " formControlName="area ">
-      <mat-error *ngIf="formGroup.hasError( 'required', [ 'area']) ">
-        Please enter a valid name
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="new-user__field ">
-      <input matInput placeholder="Job Title " formControlName="jobTitle ">
-      <mat-error *ngIf="formGroup.hasError( 'required', [ 'jobTitle']) ">
-        Please enter a valid name
-      </mat-error>
-    </mat-form-field>
-    <mat-form-field class="new-user__field ">
-      <input matInput placeholder="Tip Rate " formControlName="tipRate ">
-      <mat-error *ngIf="formGroup.hasError( 'required', [ 'tipRate']) ">
-        Please enter a valid name
-      </mat-error>
-    </mat-form-field> 
-  -->
+  <div>
+    <app-job-area-selector formControlName="area"></app-job-area-selector>
+    <mat-error *ngIf="formGroup.hasError('required', ['area'])">
+      Please select a job title based on the area
+    </mat-error>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!(formGroup.status === 'VALID')">Save</button>
+  </div>
 </form>
 <p>Form value: {{ formGroup.value | json }}</p>
+<p>Form status: {{ formGroup.status }}</p>

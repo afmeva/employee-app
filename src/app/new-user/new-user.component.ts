@@ -1,22 +1,25 @@
 import { Component, } from '@angular/core';
-import { AbstractControl, ValidatorFn, FormBuilder, FormControl, FormGroupDirective, NgForm, FormGroup, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import {
+  AbstractControl,
+  ValidatorFn,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    console.log(control, form);
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
+type country = {
+  name: string;
 }
-function validatorTest(arr): ValidatorFn {
+
+const countryValidator = (countries: country[]): ValidatorFn => {
   return (control: AbstractControl): { [key: string]: any } | null => {
-    const hasValue = arr.some(el => el.name === control.value);
+    const hasValue = countries.some(({ name }) => name === control.value);
     return hasValue ? null : { error: '' };
   };
 }
 
-const countries = [
+//TODO: create country service
+const countries: country[] = [
   {
     name: 'Colombia'
   },
@@ -35,7 +38,6 @@ const countries = [
 })
 export class NewUserComponent {
   formGroup: FormGroup;
-  matcher: ErrorStateMatcher;
   maxDate: Date;
   countries: object[];
 
@@ -43,24 +45,21 @@ export class NewUserComponent {
     this.countries = countries;
     this.createForm();
   }
-  createForm() {
+  createForm(): void {
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
 
     this.formGroup = this._fb.group({
+      // left column fields
       name: ['', Validators.required],
-      username: ['', Validators.compose([Validators.required, Validators.pattern('[A-Za-z0-9]')])],
-      id: [''],
+      username: ['', Validators.compose([Validators.required])],
       dob: ['', Validators.required],
-      age: [''],
       hireDate: ['', Validators.required],
-      country: ['', Validators.compose([Validators.required, validatorTest(countries)])],
-      area: [''],
-      status: [''],
-      jobTitle: [''],
-      tipRate: ['']
+      country: ['', Validators.compose([Validators.required, countryValidator(countries)])],
+      status: [false, Validators.required],
+      // right column fields
+      area: ['', Validators.required],
     });
-    this.matcher = new MyErrorStateMatcher();
   }
 }
 
