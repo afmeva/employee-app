@@ -104,8 +104,19 @@ export class JobAreaSelectorComponent implements ControlValueAccessor {
     return {
       area: this.areaSelected,
       jobTitle: this.jobTitleSelected,
+      hasTip: this.showTip,
       tipRate: this.tipRate
     };
+  }
+
+  findJobAreaBy(areaValue): jobArea {
+    // Should be better access it directly using index?
+    const jobAreaFound: jobArea = this.jobsByArea.find(area => area.value === areaValue);
+    return jobAreaFound ? jobAreaFound : {
+      name: '',
+      value: '',
+      jobs: []
+    }
   }
 
   onAreaChange(areaValue: string): void {
@@ -113,9 +124,7 @@ export class JobAreaSelectorComponent implements ControlValueAccessor {
     this.onChange(this.value);
 
     this.areaSelected = areaValue;
-    // Should be better access it directly using index?
-    // TODO: fix when find returns undefined
-    this.jobTitlesSelected = this.jobsByArea.find(area => area.value === areaValue).jobs;
+    this.jobTitlesSelected = this.findJobAreaBy(areaValue).jobs;
   }
 
   onJobTitleChange(jobTitle: string): void {
@@ -130,6 +139,7 @@ export class JobAreaSelectorComponent implements ControlValueAccessor {
     this.areaSelected = '';
     this.jobTitleSelected = '';
     this.tipRate = null;
+    this.showTip = false;
   }
 
   onChange(value: any) { }
