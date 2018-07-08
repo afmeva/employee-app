@@ -51,7 +51,7 @@
   </div>
   <div>
     <app-job-area-selector formControlName="area"></app-job-area-selector>
-    <mat-error *ngIf="formGroup.controls.area.status === 'INVALID' && !formGroup.pristine">
+    <mat-error *ngIf="formGroup.controls.area.status === 'INVALID' && !formGroup.controls.area.pristine">
       Please select a job title based on the area
     </mat-error>
   </div>
