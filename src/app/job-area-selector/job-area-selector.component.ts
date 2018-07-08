@@ -109,7 +109,7 @@ export class JobAreaSelectorComponent implements ControlValueAccessor {
     };
   }
 
-  findJobAreaBy(areaValue): jobArea {
+  findJobArea(areaValue): jobArea {
     // Should be better access it directly using index?
     const jobAreaFound: jobArea = this.jobsByArea.find(area => area.value === areaValue);
     return jobAreaFound ? jobAreaFound : {
@@ -124,7 +124,7 @@ export class JobAreaSelectorComponent implements ControlValueAccessor {
     this.onChange(this.value);
 
     this.areaSelected = areaValue;
-    this.jobTitlesSelected = this.findJobAreaBy(areaValue).jobs;
+    this.jobTitlesSelected = this.findJobArea(areaValue).jobs;
   }
 
   onJobTitleChange(jobTitle: string): void {

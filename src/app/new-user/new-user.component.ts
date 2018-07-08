@@ -4,7 +4,8 @@ import {
   ValidatorFn,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
+  NgControlStatus
 } from '@angular/forms';
 
 type country = {
@@ -15,6 +16,19 @@ const countryValidator = (countries: country[]): ValidatorFn => {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const hasValue = countries.some(({ name }) => name === control.value);
     return hasValue ? null : { error: '' };
+  };
+}
+
+const areaValidator = (): ValidatorFn => {
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const hasErrorOnTexts = !control.value.area ||
+      !control.value.jobTitle;
+
+    const hasErrorOnTips = control.value.hasTip
+      ? !control.value.tipRate
+      : false;
+
+    return hasErrorOnTexts || hasErrorOnTips ? { error: '' } : null;
   };
 }
 
@@ -58,7 +72,7 @@ export class NewUserComponent {
       country: ['', Validators.compose([Validators.required, countryValidator(countries)])],
       status: [false, Validators.required],
       // right column fields
-      area: ['', Validators.required],
+      area: ['', Validators.compose([Validators.required, areaValidator()])],
     });
   }
 }
