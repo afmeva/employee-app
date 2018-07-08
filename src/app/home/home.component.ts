@@ -8,11 +8,6 @@ interface AppState {
 
 type jobTitle = "undef" | "host" | "waitress";
 
-enum ex {
-  a = 'a',
-  b = 'b'
-}
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -31,13 +26,25 @@ export class HomeComponent {
     },
     {
       name: 'erase',
-      callback({ id }) {
+      callback: ({ id }) => {
         // dispatch action here to remove employee
         console.log(id)
+        const ans = {
+          name: 'lala',
+          username: 'userlala',
+          dob: '2000-02-10T05:00:00.000Z',
+          hireDate: '2010-07-07T05:00:00.000Z',
+          country: 'Colombia',
+          status: true,
+          area: {
+            area: 'services',
+            jobTitle: 'tuttofare',
+            hasTip: false,
+            tipRate: null
+          }
+        }
+        this.store.dispatch({ type: 'CREATE', payload: ans });
       }
     }]
-    console.log(Object.keys(ex));
-
-    this.test = 'undef';
   }
 }

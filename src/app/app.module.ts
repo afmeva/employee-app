@@ -17,9 +17,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 
+//pipes
+import { DateToAge } from './pipes/date-age.pipe';
 
 //routes
 import { routes } from './routes/routes.config';
+
+//reducers
+import { employeeReducer } from './reducers/employee.reducer';
 
 //components
 import { AppComponent } from './app.component';
@@ -28,20 +33,6 @@ import { NewUserComponent } from './new-user/new-user.component';
 import { HomeComponent } from './home/home.component';
 import { JobAreaSelectorComponent } from './job-area-selector/job-area-selector.component';
 
-//TODO: group up interfaces
-export interface employee {
-  id: number;
-  name: string;
-  age: number;
-  username: string;
-  hireDate: number;
-}
-
-const ELEMENT_DATA: employee[] = [
-  { id: 1, name: 'Pikachu', age: 10, username: 'SexyThunder', hireDate: 1800000 },
-  { id: 2, name: 'Squirtle', age: 10, username: 'DeadPool', hireDate: 1800000 },
-  { id: 3, name: 'Goku', age: 10, username: 'Mona123', hireDate: 1800000 },
-];
 
 @NgModule({
   declarations: [
@@ -49,13 +40,14 @@ const ELEMENT_DATA: employee[] = [
     EmployeeTableComponent, // TODO: review declaration.
     NewUserComponent,
     HomeComponent,
-    JobAreaSelectorComponent
+    JobAreaSelectorComponent,
+    DateToAge
   ],
   imports: [
     BrowserAnimationsModule,
     RouterModule.forRoot(routes),
     StoreModule.forRoot({
-      employees: () => ELEMENT_DATA
+      employees: employeeReducer,
     }),
     FormsModule,
     ReactiveFormsModule,

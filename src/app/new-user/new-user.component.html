@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" class="new-user__base">
+<form [formGroup]="formGroup" class="new-user__base" (submit)="onSubmit()">
   <div>
     <mat-form-field class="new-user__field">
       <input matInput placeholder="name" formControlName="name">
@@ -56,7 +56,7 @@
     </mat-error>
   </div>
   <div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!(formGroup.status === 'VALID')">Save</button>
+    <button mat-raised-button color="primary" type="submit">Save</button>
   </div>
 </form>
 <p>Form value: {{ formGroup.value | json }}</p>
