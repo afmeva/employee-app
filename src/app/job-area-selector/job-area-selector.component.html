@@ -1,14 +1,18 @@
-<mat-tab-group color="accent" backgroundColor="primary" (selectedTabChange)="onTabChange()">
-  <!-- jobByArea[0] area name, jobByArea[1] jobs  -->
-  <mat-tab *ngFor="let jobByArea of jobsByArea" [label]="jobByArea[0]">
-    <mat-radio-group class="job-area-selector__radioGroup" (change)="change($event.value)" [value]="currentSelection">
-      <mat-radio-button class="job-area-selector__radio" *ngFor="let job of jobByArea[1]" [value]="job" color="primary">
-        {{job.name}}
-      </mat-radio-button>
-    </mat-radio-group>
-  </mat-tab>
-</mat-tab-group>
-<div *ngIf="currentSelection.hasTip">
+<div class="toogle-group">
+  <mat-button-toggle-group [value]="areaSelected">
+    <mat-button-toggle *ngFor="let jobByArea of jobsByArea" [value]="jobByArea.value" (change)="onAreaChange($event.value)">
+      {{jobByArea.name}}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+<div class="toogle-group">
+  <mat-button-toggle-group [value]="jobTitleSelected" vertical="true" (change)="onJobTitleChange($event.value)">
+    <mat-button-toggle *ngFor="let jobTitle of jobTitlesSelected" [value]="jobTitle.value">
+      {{jobTitle.name}}
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+<div *ngIf="showTip">
   <span>Tip Rate:</span>
   <mat-slider color="primary" thumbLabel="Tip Rate" max="1" step="0.1" [value]="tipRate" (input)="onTipRateInput($event.value)">
     Tip Rate

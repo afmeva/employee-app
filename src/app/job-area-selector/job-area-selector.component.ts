@@ -1,18 +1,76 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-type jobOption = {
-  value: string,
+type jobArea = {
   name: string,
-  hasTip: boolean
+  value: string,
+  jobs: job[];
 };
 
 type job = {
-  name: string,
   value: string,
+  name: string,
   hasTip: boolean,
-  tip: number
 }
+
+// should this be a service?
+const jobsByArea: jobArea[] = [
+  {
+    name: 'Services',
+    value: 'services',
+    jobs: [{
+      value: 'manager',
+      name: 'Manager',
+      hasTip: false,
+    },
+    {
+      value: 'host',
+      name: 'Hosts',
+      hasTip: false,
+    },
+    {
+      value: 'tuttofare',
+      name: 'Tuttofare',
+      hasTip: false,
+    },
+    {
+      value: 'waitress',
+      name: 'Waitress',
+      hasTip: true,
+    },
+    {
+      value: 'dinningRoomManager',
+      name: 'Dinning Room Manager',
+      hasTip: true,
+    }]
+  },
+  {
+    value: 'kitchen',
+    name: 'Kitchen',
+    jobs: [
+      {
+        value: 'chef',
+        name: 'Chef',
+        hasTip: false,
+      },
+      {
+        value: 'sousChef',
+        name: 'Sous Chef',
+        hasTip: false,
+      },
+      {
+        value: 'dishwasher',
+        name: 'Dishwasher',
+        hasTip: false,
+      },
+      {
+        value: 'cook',
+        name: 'Cook',
+        hasTip: false,
+      }
+    ]
+  }
+]
 
 @Component({
   selector: 'app-job-area-selector',
@@ -28,97 +86,65 @@ type job = {
 })
 export class JobAreaSelectorComponent implements ControlValueAccessor {
   onTouched: (_: any) => void;
-  currentSelection: jobOption;
-  disabled: boolean;
-  jobsByArea: Array<[string, jobOption[]]>
-  tipRate: number;
+  disabled: boolean; //TODO: fix disable behavior
+  tipRate: number | null;
+  areaSelected: string;
+  jobsByArea: jobArea[];
+  jobTitlesSelected: job[];
+  jobTitleSelected: string;
+  showTip: boolean;
 
   constructor() {
     this.tipRate = 0.5;
-    this.jobsByArea = [
-      ['services', [
-        {
-          value: 'manager',
-          name: 'Manager',
-          hasTip: false,
-        },
-        {
-          value: 'host',
-          name: 'Hosts',
-          hasTip: false,
-        },
-        {
-          value: 'tuttofare',
-          name: 'Tuttofare',
-          hasTip: false,
-        },
-        {
-          value: 'waitress',
-          name: 'Waitress',
-          hasTip: true,
-        },
-        {
-          value: 'dinningRoomManager',
-          name: 'Dinning Room Manager',
-          hasTip: true,
-        }]],
-      ['kitchen', [
-        {
-          value: 'chef',
-          name: 'Chef',
-          hasTip: false,
-        },
-        {
-          value: 'sousChef',
-          name: 'Sous Chef',
-          hasTip: false,
-        },
-        {
-          value: 'dishwasher',
-          name: 'Dishwasher',
-          hasTip: false,
-        },
-        {
-          value: 'cook',
-          name: 'Cook',
-          hasTip: false,
-        },
-        {
-          value: 'dinningRoomManager',
-          name: 'Dinning Room Manager',
-          hasTip: false,
-        }]]
-    ];
+    this.jobsByArea = jobsByArea;
+    this.showTip = false;
   }
 
-  get value(): job {
+  get value() {
     return {
-      ...this.currentSelection,
-      tip: this.tipRate
-    }
+      area: this.areaSelected,
+      jobTitle: this.jobTitleSelected,
+      tipRate: this.tipRate
+    };
   }
-  onChange(value: job) { }
 
-  change(value: jobOption): void {
-    this.writeValue(value);
-  };
+  onAreaChange(areaValue: string): void {
+    this.cleanSelection();
+    this.onChange(this.value);
 
-  onTabChange(): void {
-    const emptyJobOption = {
-      value: '',
-      name: '',
-      hasTip: false
-    }
-    this.writeValue(emptyJobOption);
+    this.areaSelected = areaValue;
+    // Should be better access it directly using index?
+    // TODO: fix when find returns undefined
+    this.jobTitlesSelected = this.jobsByArea.find(area => area.value === areaValue).jobs;
   }
+
+  onJobTitleChange(jobTitle: string): void {
+    this.jobTitleSelected = jobTitle;
+    // Should be better access it directly using index?
+    // TODO: fix when find returns undefined
+    this.showTip = this.jobTitlesSelected.find(job => job.value === jobTitle).hasTip;
+    this.onChange(this.value);
+  }
+
+  cleanSelection(): void {
+    this.areaSelected = '';
+    this.jobTitleSelected = '';
+    this.tipRate = null;
+  }
+
+  onChange(value: any) { }
 
   onTipRateInput(value: number): void {
     this.tipRate = value;
-    this.writeValue(this.currentSelection);
+    this.onChange(this.value);
   }
 
-  writeValue(value: jobOption): void {
-    this.currentSelection = value;
+  writeValue(value: any): void {
+    this.onAreaChange(value.area);
+    this.jobTitleSelected = value.jobTitle;
+    this.tipRate = value.tipRate;
+    this.showTip = !!value.tipRate;
+
     this.onChange(this.value);
   }
   registerOnChange(fn: any): void {
