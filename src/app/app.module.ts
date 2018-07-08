@@ -3,6 +3,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
+import { EmployeeEffects } from './effects/employee.effects';
 
 //Material
 import { MatNativeDateModule } from '@angular/material'
@@ -49,6 +51,7 @@ import { JobAreaSelectorComponent } from './job-area-selector/job-area-selector.
     StoreModule.forRoot({
       employees: employeeReducer,
     }),
+    EffectsModule.forRoot([EmployeeEffects]),
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
