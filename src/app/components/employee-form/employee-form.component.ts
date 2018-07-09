@@ -19,6 +19,8 @@ type EmployeeFormModes = 'UPDATE' | 'CREATE';
 export class EmployeeForm {
   @Input() data; // TODO: create employee type
   @Input() mode: EmployeeFormModes = 'CREATE';
+  @Input() disabled: boolean;
+
   formGroup: FormGroup;
   maxDate: Date;
   countries: Observable<country[]>;
@@ -55,6 +57,10 @@ export class EmployeeForm {
       // right column fields
       area: ['', areaValidator()],
     });
+
+    if (this.disabled) {
+      this.formGroup.disable();
+    }
 
     if (this.mode === 'UPDATE') {
       this.formGroup.setValue(this.data);

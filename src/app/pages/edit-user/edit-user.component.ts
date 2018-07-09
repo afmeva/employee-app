@@ -11,16 +11,21 @@ import { combineLatest } from 'rxjs';
 export class EditUserComponent {
   data: any;
   employeeId: number;
+  disabled: boolean = false;
 
   //TODO: create state type
   constructor(private store: Store<any>, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    combineLatest(this.route.params, this.store.select('employees'))
-      .subscribe(([{ employeeId }, employees]) => {
+    combineLatest(
+      this.route.params,
+      this.store.select('employees'),
+      this.route.queryParams)
+      .subscribe(([{ employeeId }, employees, { viewmode }]) => {
         const employee = employees.find(employee => employee.id === parseInt(employeeId));
         if (employee) {
           this.data = employee;
+          this.disabled = viewmode;
         } else {
           this.router.navigate(['/new-user']);
         }

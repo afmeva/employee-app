@@ -27,6 +27,12 @@ export class HomeComponent {
       }
     },
     {
+      name: 'View',
+      callback: ({ id }) => {
+        this.router.navigate([id], { queryParams: { viewmode: 'true' } });
+      }
+    },
+    {
       name: 'Erase',
       callback: ({ id }) => {
         this.store.dispatch({ type: employeeActions.REMOVE, payload: id });
