@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
-import { employeeActions } from '../reducers/employee.reducer';
+import { employeeActions } from '../../reducers/employee.reducer';
 
 interface AppState {
   employees: object[];

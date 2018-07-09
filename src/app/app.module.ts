@@ -28,12 +28,15 @@ import { routes } from './routes/routes.config';
 //reducers
 import { employeeReducer } from './reducers/employee.reducer';
 
+//pages
+import { HomeComponent } from './pages/home/home.component';
+
 //components
 import { AppComponent } from './app.component';
-import { EmployeeTableComponent } from './employee-table/employee-table.component';
-import { NewUserComponent } from './new-user/new-user.component';
-import { HomeComponent } from './home/home.component';
-import { JobAreaSelectorComponent } from './job-area-selector/job-area-selector.component';
+import { EmployeeTableComponent } from './components/employee-table/employee-table.component';
+import { NewUserComponent } from './pages/new-user/new-user.component';
+import { JobAreaSelectorComponent } from './components/job-area-selector/job-area-selector.component';
+import { EmployeeForm } from './components/employee-form/employee-form.component';
 
 
 @NgModule({
@@ -43,6 +46,7 @@ import { JobAreaSelectorComponent } from './job-area-selector/job-area-selector.
     NewUserComponent,
     HomeComponent,
     JobAreaSelectorComponent,
+    EmployeeForm,
     DateToAge
   ],
   imports: [

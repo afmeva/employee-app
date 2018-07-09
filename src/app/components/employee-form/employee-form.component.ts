@@ -8,7 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { employeeActions } from '../reducers/employee.reducer';
+import { employeeActions } from '../../reducers/employee.reducer';
 
 type country = {
   name: string;
@@ -48,11 +48,11 @@ const countries: country[] = [
 ];
 
 @Component({
-  selector: 'app-new-user',
-  templateUrl: './new-user.component.html',
-  styleUrls: ['./new-user.component.scss']
+  selector: 'app-employee-form',
+  templateUrl: './employee-form.component.html',
+  styleUrls: ['./employee-form.component.scss']
 })
-export class NewUserComponent {
+export class EmployeeForm {
   formGroup: FormGroup;
   maxDate: Date;
   countries: object[];
