@@ -1,38 +1,10 @@
 import { Component, } from '@angular/core';
 import { Store } from '@ngrx/store';
-import {
-  AbstractControl,
-  ValidatorFn,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { employeeActions } from '../../reducers/employee.reducer';
-
-type country = {
-  name: string;
-}
-
-const countryValidator = (countries: country[]): ValidatorFn => {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const hasValue = countries.some(({ name }) => name === control.value);
-    return hasValue ? null : { error: '' };
-  };
-}
-
-const areaValidator = (): ValidatorFn => {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-    const hasErrorOnTexts = !control.value.area ||
-      !control.value.jobTitle;
-
-    const hasErrorOnTips = control.value.hasTip
-      ? !control.value.tipRate
-      : false;
-
-    return hasErrorOnTexts || hasErrorOnTips ? { error: '' } : null;
-  };
-}
+import { countryValidator, areaValidator } from './employee-form.validators'
+import { country } from '../../shared/employee.common';
 
 //TODO: create country service
 const countries: country[] = [
