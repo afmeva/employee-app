@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
+import { Router } from '@angular/router'
 import { Observable } from 'rxjs';
 
 import { employeeActions } from '../../reducers/employee.reducer';
@@ -7,8 +8,6 @@ import { employeeActions } from '../../reducers/employee.reducer';
 interface AppState {
   employees: object[];
 };
-
-type jobTitle = "undef" | "host" | "waitress";
 
 @Component({
   selector: 'app-home',
@@ -18,16 +17,17 @@ type jobTitle = "undef" | "host" | "waitress";
 export class HomeComponent {
   data: Observable<object>;
   buttons: object[];
-  test: jobTitle;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private router: Router) {
     this.data = store.select('employees');
     this.buttons = [{
-      name: 'edit',
-      callback() { }
+      name: 'Edit',
+      callback: ({ id }) => {
+        this.router.navigate([id]);
+      }
     },
     {
-      name: 'erase',
+      name: 'Erase',
       callback: ({ id }) => {
         this.store.dispatch({ type: employeeActions.REMOVE, payload: id });
       }
