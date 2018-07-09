@@ -1,4 +1,4 @@
-import { Component, } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -19,17 +19,23 @@ const countries: country[] = [
   }
 ];
 
+type EmployeeFormModes = 'UPDATE' | 'CREATE';
+
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employee-form.component.html',
   styleUrls: ['./employee-form.component.scss']
 })
 export class EmployeeForm {
+  @Input() data; // TODO: create employee type
+  @Input() mode: EmployeeFormModes = 'CREATE';
   formGroup: FormGroup;
   maxDate: Date;
   countries: object[];
 
-  constructor(private _fb: FormBuilder, private store: Store<any>) {
+  constructor(private _fb: FormBuilder, private store: Store<any>) { }
+
+  ngOnInit() {
     this.countries = countries;
     this.createForm();
   }
@@ -39,6 +45,7 @@ export class EmployeeForm {
     this.maxDate.setFullYear(this.maxDate.getFullYear() - 18);
 
     this.formGroup = this._fb.group({
+      id: [''],
       // left column fields
       name: ['', Validators.required],
       username: ['', Validators.compose([Validators.required])],
@@ -50,11 +57,14 @@ export class EmployeeForm {
       area: ['', areaValidator()],
     });
 
+    if (this.mode === 'UPDATE') {
+      this.formGroup.setValue(this.data);
+    }
   }
 
   onSubmit() {
     if (this.formGroup.status === 'VALID') {
-      this.store.dispatch({ type: employeeActions.CREATE, payload: this.formGroup.value });
+      this.store.dispatch({ type: employeeActions[this.mode], payload: this.formGroup.value });
     }
   }
 }

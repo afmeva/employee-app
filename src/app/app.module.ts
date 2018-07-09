@@ -37,6 +37,7 @@ import { EmployeeTableComponent } from './components/employee-table/employee-tab
 import { NewUserComponent } from './pages/new-user/new-user.component';
 import { JobAreaSelectorComponent } from './components/job-area-selector/job-area-selector.component';
 import { EmployeeForm } from './components/employee-form/employee-form.component';
+import { EditUserComponent } from './pages/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { EmployeeForm } from './components/employee-form/employee-form.component
     HomeComponent,
     JobAreaSelectorComponent,
     EmployeeForm,
-    DateToAge
+    DateToAge,
+    EditUserComponent
   ],
   imports: [
     BrowserAnimationsModule,
