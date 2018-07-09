@@ -1,4 +1,7 @@
-export const CREATE = 'CREATE';
+export enum employeeActions {
+  CREATE = 'CREATE_EMPLOYEE',
+  REMOVE = 'REMOVE_EMPLOYEE'
+}
 
 //TODO: group up interfaces
 export interface employee {
@@ -21,12 +24,18 @@ const initialState = ELEMENT_DATA;
 
 export function employeeReducer(state = initialState, action) {
   switch (action.type) {
-    case CREATE:
+    case employeeActions.CREATE:
       return [...state, {
         // TODO: should this use domain class
         ...action.payload,
         id: generateID(),
       }];
+    case employeeActions.REMOVE:
+      const index = state.findIndex(el => el.id === action.payload);
+      return [
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
+      ];
     default:
       return state;
   }

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
+import { employeeActions } from '../reducers/employee.reducer';
+
 @Injectable()
 export class EmployeeEffects {
   @Effect({
@@ -12,7 +14,7 @@ export class EmployeeEffects {
   })
   saveEmployee$: Observable<Promise<boolean>> =
     this.actions$.pipe(
-      ofType('CREATE'),
+      ofType(employeeActions.CREATE),
       map(_ => this.router.navigate(['/']))
     );
   constructor(private actions$: Actions, private router: Router) { }

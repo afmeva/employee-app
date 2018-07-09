@@ -6,8 +6,9 @@ import {
   FormBuilder,
   FormGroup,
   Validators,
-  NgControlStatus
 } from '@angular/forms';
+
+import { employeeActions } from '../reducers/employee.reducer';
 
 type country = {
   name: string;
@@ -67,43 +68,21 @@ export class NewUserComponent {
 
     this.formGroup = this._fb.group({
       // left column fields
-      name: [''],
-      username: [''],
-      dob: [''],
-      hireDate: [''],
-      country: [''],
-      status: [false],
+      name: ['', Validators.required],
+      username: ['', Validators.compose([Validators.required])],
+      dob: ['', Validators.required],
+      hireDate: ['', Validators.required],
+      country: ['', Validators.compose([Validators.required, countryValidator(countries)])],
+      status: [false, Validators.required],
       // right column fields
-      area: [''],
-      // });
-      // left column fields
-      // name: ['', Validators.required],
-      // username: ['', Validators.compose([Validators.required])],
-      // dob: ['', Validators.required],
-      // hireDate: ['', Validators.required],
-      // country: ['', Validators.compose([Validators.required, countryValidator(countries)])],
-      // status: [false, Validators.required],
-      // // right column fields
-      // area: ['', Validators.compose([Validators.required, areaValidator()])],
+      area: ['', areaValidator()],
     });
 
   }
 
   onSubmit() {
-    const ans = {
-      name: 'lala',
-      username: 'userlala',
-      dob: '2000-02-10T05:00:00.000Z',
-      hireDate: '2010-07-07T05:00:00.000Z',
-      country: 'Colombia',
-      status: true,
-      area: {
-        area: 'services',
-        jobTitle: 'tuttofare',
-        hasTip: false,
-        tipRate: null
-      }
+    if (this.formGroup.status === 'VALID') {
+      this.store.dispatch({ type: employeeActions.CREATE, payload: this.formGroup.value });
     }
-    this.store.dispatch({ type: 'CREATE', payload: ans });
   }
 }
