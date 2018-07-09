@@ -1,3 +1,4 @@
+// TODO: refactor classnames - remove BEM
 .new-user {
   &__base {
     display: grid;
@@ -11,4 +12,8 @@
   &__field {
     width: 100%;
   }
+}
+
+.back-link {
+  margin-right: 20px;
 }
