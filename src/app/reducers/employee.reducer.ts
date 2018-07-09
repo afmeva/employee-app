@@ -61,12 +61,14 @@ export function employeeReducer(state = initialState, action) {
         id: generateID(),
       }];
     case employeeActions.UPDATE: {
-      const index = state.findIndex(el => el.id === action.payload);
-      return [
-        ...state.slice(0, index),
-        action.payload,
-        ...state.slice(index + 1)
-      ];
+      const index = state.findIndex(el => el.id === action.payload.id);
+      return index !== -1
+        ? [
+          ...state.slice(0, index),
+          action.payload,
+          ...state.slice(index + 1)
+        ]
+        : state;
     }
     case employeeActions.REMOVE: {
       const index = state.findIndex(el => el.id === action.payload);

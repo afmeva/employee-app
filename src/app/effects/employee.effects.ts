@@ -14,7 +14,7 @@ export class EmployeeEffects {
   })
   saveEmployee$: Observable<Promise<boolean>> =
     this.actions$.pipe(
-      ofType(employeeActions.CREATE),
+      ofType(employeeActions.CREATE, employeeActions.UPDATE),
       map(_ => this.router.navigate(['/']))
     );
   constructor(private actions$: Actions, private router: Router) { }
