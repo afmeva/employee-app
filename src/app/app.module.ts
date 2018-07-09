@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './effects/employee.effects';
+import { HttpClientModule } from '@angular/common/http';
 
 //Material
 import { MatNativeDateModule } from '@angular/material'
@@ -58,6 +59,7 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
       employees: employeeReducer,
     }),
     EffectsModule.forRoot([EmployeeEffects]),
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,

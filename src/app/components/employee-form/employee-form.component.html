@@ -18,11 +18,11 @@
     <mat-form-field class="new-user__field">
       <input matInput placeholder="Country" [matAutocomplete]="auto" formControlName="country">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let country of countries" [value]="country.name">
+        <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
           <span>{{country.name}}</span>
         </mat-option>
       </mat-autocomplete>
-      <mat-error *ngIf="formGroup.hasError('required', ['country'])">
+      <mat-error *ngIf="formGroup.controls.country.status === 'INVALID'">
         Please enter a country
       </mat-error>
     </mat-form-field>

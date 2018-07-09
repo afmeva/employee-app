@@ -1,23 +1,13 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators'
 
 import { employeeActions } from '../../reducers/employee.reducer';
 import { countryValidator, areaValidator } from './employee-form.validators'
 import { country } from '../../shared/employee.common';
-
-//TODO: create country service
-const countries: country[] = [
-  {
-    name: 'Colombia'
-  },
-  {
-    name: 'Suecia'
-  },
-  {
-    name: 'India'
-  }
-];
+import { CountryService } from '../../services/country.service'
 
 type EmployeeFormModes = 'UPDATE' | 'CREATE';
 
@@ -31,13 +21,22 @@ export class EmployeeForm {
   @Input() mode: EmployeeFormModes = 'CREATE';
   formGroup: FormGroup;
   maxDate: Date;
-  countries: object[];
+  countries: Observable<country[]>;
+  filteredCountries
 
-  constructor(private _fb: FormBuilder, private store: Store<any>) { }
+  constructor(private _fb: FormBuilder, private store: Store<any>, private countryService: CountryService) { }
 
   ngOnInit() {
-    this.countries = countries;
+    this.countries = this.countryService.getCountries();
     this.createForm();
+
+    this.filteredCountries =
+      combineLatest(
+        this.formGroup.controls.country.valueChanges,
+        this.countries)
+        .pipe(
+          map(([value, countries]) => countries.filter(({ name }) => name.toLowerCase().includes(value)))
+        );
   }
 
   createForm(): void {
@@ -51,7 +50,7 @@ export class EmployeeForm {
       username: ['', Validators.compose([Validators.required])],
       dob: ['', Validators.required],
       hireDate: ['', Validators.required],
-      country: ['', Validators.compose([Validators.required, countryValidator(countries)])],
+      country: ['', Validators.required, countryValidator(this.countries)],
       status: [false, Validators.required],
       // right column fields
       area: ['', areaValidator()],
