@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit-user',
@@ -12,12 +12,13 @@ export class EditUserComponent {
   data: any;
   employeeId: number;
   disabled: boolean = false;
+  subscription: Subscription;
 
   //TODO: create state type
   constructor(private store: Store<any>, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
-    combineLatest(
+    this.subscription = combineLatest(
       this.route.params,
       this.store.select('employees'),
       this.route.queryParams)
@@ -30,5 +31,9 @@ export class EditUserComponent {
           this.router.navigate(['/new-user']);
         }
       });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

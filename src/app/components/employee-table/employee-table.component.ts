@@ -9,5 +9,4 @@ export class EmployeeTableComponent {
   @Input() dataSource: object[];
   @Input() buttons: object[];
   displayedColumns: string[] = ['name', 'age', 'username', 'hireDate', 'controls'];
-
 }
