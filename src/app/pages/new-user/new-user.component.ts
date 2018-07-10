@@ -1,7 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../../components/dialog/dialog.component';
-// import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+
+import { employeeActions } from '../../reducers/employee.reducer';
 
 @Component({
   selector: 'app-new-user',
@@ -10,7 +12,10 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 })
 export class NewUserComponent {
   @ViewChild('employeeForm') employeeForm;
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private store: Store<any>) {
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
 
   canDeactive() {
     if (this.employeeForm.formGroup.dirty) {
@@ -22,5 +27,11 @@ export class NewUserComponent {
       return dialogRef.afterClosed();
     }
     return true;
+  }
+
+  onSubmit(form) {
+    if (form.status === 'VALID') {
+      this.store.dispatch({ type: employeeActions.CREATE, payload: form.value });
+    }
   }
 }

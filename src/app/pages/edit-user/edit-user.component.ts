@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, Subscription } from 'rxjs';
+import { employeeActions } from '../../reducers/employee.reducer';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,7 +16,9 @@ export class EditUserComponent {
   subscription: Subscription;
 
   //TODO: create state type
-  constructor(private store: Store<any>, private route: ActivatedRoute, private router: Router) { }
+  constructor(private store: Store<any>, private route: ActivatedRoute, private router: Router) {
+    this.onSubmit = this.onSubmit.bind(this);
+  }
 
   ngOnInit() {
     this.subscription = combineLatest(
@@ -35,5 +38,11 @@ export class EditUserComponent {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  onSubmit(form) {
+    if (form.status === 'VALID') {
+      this.store.dispatch({ type: employeeActions.UPDATE, payload: form.value });
+    }
   }
 }

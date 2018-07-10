@@ -1,10 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators'
 
-import { employeeActions } from '../../reducers/employee.reducer';
 import { countryValidator, areaValidator } from './employee-form.validators'
 import { country } from '../../shared/employee.common';
 import { CountryService } from '../../services/country.service'
@@ -20,13 +18,14 @@ export class EmployeeForm {
   @Input() data; // TODO: create employee type
   @Input() mode: EmployeeFormModes = 'CREATE';
   @Input() disabled: boolean;
+  @Input() onSubmit: () => void;
 
   formGroup: FormGroup;
   maxDate: Date;
   countries: Observable<country[]>;
   filteredCountries
 
-  constructor(private _fb: FormBuilder, private store: Store<any>, private countryService: CountryService) { }
+  constructor(private _fb: FormBuilder, private countryService: CountryService) { }
 
   ngOnInit() {
     this.countries = this.countryService.getCountries();
@@ -64,12 +63,6 @@ export class EmployeeForm {
 
     if (this.mode === 'UPDATE') {
       this.formGroup.setValue(this.data);
-    }
-  }
-
-  onSubmit() {
-    if (this.formGroup.status === 'VALID') {
-      this.store.dispatch({ type: employeeActions[this.mode], payload: this.formGroup.value });
     }
   }
 }

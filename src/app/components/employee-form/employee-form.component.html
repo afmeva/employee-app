@@ -1,4 +1,4 @@
-<form [formGroup]="formGroup" class="new-user__base" (submit)="onSubmit()">
+<form [formGroup]="formGroup" class="new-user__base" (submit)="onSubmit(formGroup)">
   <div>
     <mat-form-field class="new-user__field">
       <input matInput placeholder="name" formControlName="name">
