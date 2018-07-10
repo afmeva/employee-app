@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
+import { MatSort, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-employee-table',
@@ -8,5 +9,7 @@ import { Component, Input } from '@angular/core';
 export class EmployeeTableComponent {
   @Input() dataSource: object[];
   @Input() buttons: object[];
+  @ViewChild(MatSort) sort: MatSort;
+
   displayedColumns: string[] = ['name', 'age', 'username', 'hireDate', 'controls'];
 }

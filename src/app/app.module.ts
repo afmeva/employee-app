@@ -9,8 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 // TODO: create module for material components
 //Material
-import { MatNativeDateModule } from '@angular/material'
-import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatNativeDateModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'
@@ -22,6 +21,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSortModule } from '@angular/material/sort'
 
 //guards 
 import { CanDeactivateForm } from './routes/routes.guards';
@@ -46,7 +47,6 @@ import { JobAreaSelectorComponent } from './components/job-area-selector/job-are
 import { EmployeeForm } from './components/employee-form/employee-form.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-
 
 @NgModule({
   declarations: [
@@ -81,7 +81,9 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatTabsModule,
     MatRadioModule,
     MatSliderModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule,
+    MatSortModule
   ],
   entryComponents: [
     DialogComponent
