@@ -1,12 +1,12 @@
-<form [formGroup]="formGroup" class="new-user__base" (submit)="onSubmit(formGroup)">
+<form [formGroup]="formGroup" class="container" (submit)="onSubmit(formGroup)">
   <div>
-    <mat-form-field class="new-user__field">
+    <mat-form-field class="field">
       <input matInput placeholder="name" formControlName="name">
       <mat-error *ngIf="formGroup.hasError('required', ['name'])">
         Please enter a valid name
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="new-user__field">
+    <mat-form-field class="field">
       <input matInput [max]="maxDate" [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob">
       <mat-hint>You must be older than 18</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -15,7 +15,7 @@
         Please enter a date of birth
       </mat-error>
     </mat-form-field>
-    <mat-form-field class="new-user__field">
+    <mat-form-field class="field">
       <input matInput placeholder="Country" [matAutocomplete]="auto" formControlName="country">
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let country of filteredCountries | async" [value]="country.name">
@@ -27,7 +27,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="new-user__field ">
+    <mat-form-field class="field ">
       <input matInput placeholder="username " formControlName="username">
       <mat-error *ngIf="formGroup.hasError( 'required', [ 'username'])">
         Please enter a username
@@ -37,7 +37,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field class="new-user__field">
+    <mat-form-field class="field">
       <input matInput [max]="maxDateHireDate" [matDatepicker]="hireDatePicker" placeholder="Hire Date" formControlName="hireDate">
       <mat-datepicker-toggle matSuffix [for]="hireDatePicker"></mat-datepicker-toggle>
       <mat-datepicker #hireDatePicker startView="year"></mat-datepicker>
