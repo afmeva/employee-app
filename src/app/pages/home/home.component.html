@@ -1,3 +1,8 @@
-<app-employee-table [dataSource]="data" [buttons]="buttons">
-</app-employee-table>
-<a mat-raised-button routerLink="/newuser">Add new employee</a>
+<div class="container">
+  <mat-form-field>
+    <input matInput placeholder="Name to be searched" [formControl]="searchTerm" autocomplete="off">
+  </mat-form-field>
+  <app-employee-table [dataSource]="filteredData | async" [buttons]="buttons">
+  </app-employee-table>
+  <a mat-raised-button routerLink="/newuser">Add new employee</a>
+</div>
