@@ -4,7 +4,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators'
 
 import { countryValidator, areaValidator } from './employee-form.validators'
-import { country } from '../../shared/employee.common';
+import { country, employee } from '../../shared/employee.common';
 import { CountryService } from '../../services/country.service'
 
 type EmployeeFormModes = 'UPDATE' | 'CREATE';
@@ -15,7 +15,7 @@ type EmployeeFormModes = 'UPDATE' | 'CREATE';
   styleUrls: ['./employee-form.component.scss']
 })
 export class EmployeeForm {
-  @Input() data; // TODO: create employee type
+  @Input() data: employee[];
   @Input() mode: EmployeeFormModes = 'CREATE';
   @Input() disabled: boolean;
   @Input() onSubmit: () => void;

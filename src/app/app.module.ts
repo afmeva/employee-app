@@ -20,6 +20,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSortModule } from '@angular/material/sort'
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 //guards 
 import { CanDeactivateForm } from './routes/routes.guards';
@@ -77,7 +78,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatButtonToggleModule,
     MatSliderModule,
     MatDialogModule,
-    MatSortModule
+    MatSortModule,
+    MatToolbarModule
   ],
   entryComponents: [
     DialogComponent

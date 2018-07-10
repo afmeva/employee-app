@@ -60,6 +60,6 @@
   </div>
   <div>
     <a class="back-link" mat-stroked-button routerLink="/">Back</a>
-    <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.status === 'INVALID'">Save</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.status === 'INVALID' || disabled">Save</button>
   </div>
 </form>
