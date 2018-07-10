@@ -1,10 +1,11 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
-import { country } from '../../shared/employee.common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export const countryValidator = (countries: any): ValidatorFn => {
-  return (control: AbstractControl): Observable<country[]> => {
+import { country } from '../../shared/employee.common';
+
+export const countryValidator = (countries: Observable<country[]>): ValidatorFn => {
+  return (control: AbstractControl): Observable<{ error: string } | null> => {
     return countries.pipe(
       map((countries: country[]) => {
         const hasValue = countries.some(({ name }) => name === control.value);
@@ -15,7 +16,7 @@ export const countryValidator = (countries: any): ValidatorFn => {
 }
 
 export const areaValidator = (): ValidatorFn => {
-  return (control: AbstractControl): { [key: string]: any } | null => {
+  return (control: AbstractControl): { error: string } | null => {
     const hasErrorOnTexts = !control.value.area ||
       !control.value.jobTitle;
 

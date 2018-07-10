@@ -4,6 +4,7 @@ import { DialogComponent } from '../../components/dialog/dialog.component';
 import { Store } from '@ngrx/store';
 
 import { employeeActions } from '../../reducers/employee.reducer';
+import { appState } from '../../shared/employee.common';
 
 @Component({
   selector: 'app-new-user',
@@ -12,7 +13,7 @@ import { employeeActions } from '../../reducers/employee.reducer';
 })
 export class NewUserComponent {
   @ViewChild('employeeForm') employeeForm;
-  constructor(private dialog: MatDialog, private store: Store<any>) {
+  constructor(private dialog: MatDialog, private store: Store<appState>) {
     this.onSubmit = this.onSubmit.bind(this);
   }
 

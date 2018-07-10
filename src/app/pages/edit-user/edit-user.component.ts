@@ -4,19 +4,20 @@ import { Store } from '@ngrx/store';
 import { combineLatest, Subscription } from 'rxjs';
 import { employeeActions } from '../../reducers/employee.reducer';
 
+import { appState, employee } from '../../shared/employee.common';
+
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent {
-  data: any;
+  data: employee;
   employeeId: number;
   disabled: boolean = false;
   subscription: Subscription;
 
-  //TODO: create state type
-  constructor(private store: Store<any>, private route: ActivatedRoute, private router: Router) {
+  constructor(private store: Store<appState>, private route: ActivatedRoute, private router: Router) {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -26,7 +27,7 @@ export class EditUserComponent {
       this.store.select('employees'),
       this.route.queryParams)
       .subscribe(([{ employeeId }, employees, { viewmode }]) => {
-        const employee = employees.find(employee => employee.id === parseInt(employeeId));
+        const employee: employee = employees.find(employee => employee.id === parseInt(employeeId));
         if (employee) {
           this.data = employee;
           this.disabled = viewmode;

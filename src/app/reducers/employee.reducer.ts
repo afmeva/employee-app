@@ -1,20 +1,13 @@
+import { employee } from '../shared/employee.common';
+
 export enum employeeActions {
   CREATE = 'CREATE_EMPLOYEE',
   UPDATE = 'UPDATE_EMPLOYEE',
   REMOVE = 'REMOVE_EMPLOYEE'
 }
 
-//TODO: group up interfaces
-export interface employee {
-  id: number;
-  name: string;
-  age: number;
-  username: string;
-  hireDate: number;
-}
-
 //TODO: create service
-const ELEMENT_DATA = [
+const ELEMENT_DATA: employee[] = [
   {
     id: 1,
     name: 'Pikachu',
@@ -77,13 +70,11 @@ const ELEMENT_DATA = [
   },
 ];
 
+const generateID = (): number => ELEMENT_DATA.length + 1;
 
+const initialState: employee[] = ELEMENT_DATA;
 
-const generateID = () => ELEMENT_DATA.length + 1;
-
-const initialState = ELEMENT_DATA;
-
-export function employeeReducer(state = initialState, action) {
+export function employeeReducer(state: employee[] = initialState, action) {
   switch (action.type) {
     case employeeActions.CREATE:
       return [...state, {

@@ -6,10 +6,7 @@ import { map, startWith } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
 import { employeeActions } from '../../reducers/employee.reducer';
-
-interface AppState {
-  employees: object[];
-};
+import { employee, appState } from '../../shared/employee.common';
 
 @Component({
   selector: 'app-home',
@@ -18,12 +15,12 @@ interface AppState {
 })
 export class HomeComponent {
   @ViewChild('employeeTable') employeeTable;
-  data: Observable<any>;
+  data: Observable<employee[]>;
   buttons: object[];
   searchTerm: FormControl;
-  filteredData: any;
+  filteredData: Observable<employee[]>;
 
-  constructor(private store: Store<AppState>, private router: Router) { }
+  constructor(private store: Store<appState>, private router: Router) { }
 
   ngOnInit() {
     this.searchTerm = new FormControl();

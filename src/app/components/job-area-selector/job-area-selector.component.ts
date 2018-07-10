@@ -1,7 +1,9 @@
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-type jobArea = {
+import { jobArea } from '../../shared/employee.common';
+
+type jobsByArea = {
   name: string,
   value: string,
   jobs: job[];
@@ -14,7 +16,7 @@ type job = {
 }
 
 // should this be a service?
-const jobsByArea: jobArea[] = [
+const jobsByArea: jobsByArea[] = [
   {
     name: 'Services',
     value: 'services',
@@ -86,10 +88,10 @@ const jobsByArea: jobArea[] = [
 })
 export class JobAreaSelectorComponent implements ControlValueAccessor {
   onTouched: (_: any) => void;
-  disabled: boolean; //TODO: fix disable behavior
+  disabled: boolean;
   tipRate: number | null;
   areaSelected: string;
-  jobsByArea: jobArea[];
+  jobsByArea: jobsByArea[];
   jobTitlesSelected: job[];
   jobTitleSelected: string;
   showTip: boolean;
@@ -109,9 +111,9 @@ export class JobAreaSelectorComponent implements ControlValueAccessor {
     };
   }
 
-  findJobArea(areaValue): jobArea {
+  findJobArea(areaValue): jobsByArea {
     // Should be better access it directly using index?
-    const jobAreaFound: jobArea = this.jobsByArea.find(area => area.value === areaValue);
+    const jobAreaFound: jobsByArea = this.jobsByArea.find(area => area.value === areaValue);
     return jobAreaFound ? jobAreaFound : {
       name: '',
       value: '',
@@ -149,7 +151,7 @@ export class JobAreaSelectorComponent implements ControlValueAccessor {
     this.onChange(this.value);
   }
 
-  writeValue(value: any): void {
+  writeValue(value: jobArea): void {
     this.onAreaChange(value.area);
     this.jobTitleSelected = value.jobTitle;
     this.tipRate = value.tipRate;
