@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Hi</h1>
+<div mat-dialog-content>
+  <p>You are leaving the employee creation page</p>
+  <p>Do you want to discard the changes?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-button (click)="onAccept()" cdkFocusInitial>Accept</button>
+</div>

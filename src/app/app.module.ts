@@ -7,8 +7,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { EmployeeEffects } from './effects/employee.effects';
 import { HttpClientModule } from '@angular/common/http';
 
+// TODO: create module for material components
 //Material
 import { MatNativeDateModule } from '@angular/material'
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input'
@@ -19,6 +21,10 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatDialogModule } from '@angular/material/dialog';
+
+//guards 
+import { CanDeactivateForm } from './routes/routes.guards';
 
 //pipes
 import { DateToAge } from './pipes/date-age.pipe';
@@ -39,6 +45,7 @@ import { NewUserComponent } from './pages/new-user/new-user.component';
 import { JobAreaSelectorComponent } from './components/job-area-selector/job-area-selector.component';
 import { EmployeeForm } from './components/employee-form/employee-form.component';
 import { EditUserComponent } from './pages/edit-user/edit-user.component';
+import { DialogComponent } from './components/dialog/dialog.component';
 
 
 @NgModule({
@@ -50,7 +57,8 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
     JobAreaSelectorComponent,
     EmployeeForm,
     DateToAge,
-    EditUserComponent
+    EditUserComponent,
+    DialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -72,9 +80,15 @@ import { EditUserComponent } from './pages/edit-user/edit-user.component';
     MatButtonToggleModule,
     MatTabsModule,
     MatRadioModule,
-    MatSliderModule
+    MatSliderModule,
+    MatDialogModule
   ],
-  providers: [],
+  entryComponents: [
+    DialogComponent
+  ],
+  providers: [
+    CanDeactivateForm
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
