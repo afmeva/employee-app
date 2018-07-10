@@ -49,7 +49,7 @@ export class EmployeeForm {
       id: [''],
       // left column fields
       name: ['', Validators.required],
-      username: ['', Validators.compose([Validators.required])],
+      username: ['', Validators.compose([Validators.required, Validators.pattern(/^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/g)])],
       dob: ['', Validators.required],
       hireDate: ['', Validators.required],
       country: ['', Validators.required, countryValidator(this.countries)],

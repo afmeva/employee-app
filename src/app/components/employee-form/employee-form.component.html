@@ -29,8 +29,11 @@
 
     <mat-form-field class="new-user__field ">
       <input matInput placeholder="username " formControlName="username">
-      <mat-error *ngIf="formGroup.hasError( 'required', [ 'username']) ">
+      <mat-error *ngIf="formGroup.hasError( 'required', [ 'username'])">
         Please enter a username
+      </mat-error>
+      <mat-error *ngIf="!formGroup.hasError( 'required', [ 'username']) && formGroup.hasError( 'pattern', [ 'username'])">
+        Please do not use specials characters
       </mat-error>
     </mat-form-field>
 
@@ -60,5 +63,3 @@
     <button mat-raised-button color="primary" type="submit" [disabled]="formGroup.status === 'INVALID'">Save</button>
   </div>
 </form>
-<p>Form value: {{ formGroup.value | json }}</p>
-<p>Form status: {{ formGroup.status }}</p>
