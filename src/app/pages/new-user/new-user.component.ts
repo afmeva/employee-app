@@ -19,7 +19,7 @@ export class NewUserComponent {
 
 
   canDeactive() {
-    if (this.employeeForm.formGroup.dirty) {
+    if (this.employeeForm.formGroup.dirty && this.employeeForm.formGroup.status === 'INVALID') {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '250px',
         data: {}
