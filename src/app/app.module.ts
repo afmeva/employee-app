@@ -17,11 +17,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
 import { MatSortModule } from '@angular/material/sort'
 
 //guards 
@@ -78,11 +75,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     MatAutocompleteModule,
     MatSlideToggleModule,
     MatButtonToggleModule,
-    MatTabsModule,
-    MatRadioModule,
     MatSliderModule,
     MatDialogModule,
-    MatIconModule,
     MatSortModule
   ],
   entryComponents: [
